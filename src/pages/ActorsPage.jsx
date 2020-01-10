@@ -6,29 +6,43 @@ import Container from "react-bootstrap/Container";
 import axios from 'axios';
 import Actor from "../components/Actor";
 import ActorObj from "../orm/ActorObj";
+import {Redirect} from "react-router-dom";
 
 class ActorsPage extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            actors : []
+            actors: [],
+            redirectToMovies: false
         }
     }
 
+    redirectToMovies = () => {
+        this.setState({
+            redirectToMovies: true
+        })
+    };
 
     fetchData = (event) => {
-        const url = `${process.env.REACT_APP_TMDB_GET_PERSON_BY_NAME}${event.target.value.toString().toLowerCase()}`;
-        axios.get(url).then(res => {
-            let arr = res.data.results.map(item => {
-                return <Actor data={new ActorObj(item)}/>
+        if (event.target.value.toString().length > 2){
+            const url = `${process.env.REACT_APP_TMDB_GET_PERSON_BY_NAME}${event.target.value.toString().toLowerCase()}`;
+            axios.get(url).then(res => {
+                let arr = res.data.results.map((item, index) => {
+                    return <Actor key={index} data={new ActorObj(item)} onClick={this.redirectToMovies}/>
+                });
+                this.setState({actors: arr})
             });
-            this.setState({actors:arr})
-        });
+        }else {
+            this.setState({actors: []})
+        }
     };
 
 
     render() {
+        if (this.state.redirectToMovies === true) {
+            return <Redirect to="/movies"/>
+        }
         return (
             <Container>
                 <Row>

@@ -1,0 +1,1 @@
+https://github.com/comradem/react-actors.git
