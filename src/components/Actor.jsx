@@ -6,10 +6,10 @@ class Actor extends Component {
     render() {
         return (
             <Card style={{width: '18rem'}}>
-                <Card.Img variant="top" src={this.props.data.image}/>
+                <Card.Img variant="top" src={this.props.data.profile_path} alt="no image found in db"/>
                 <Card.Body>
                     <Card.Title><a target="_blank" rel="noopener noreferrer"
-                                   href={this.props.data.profilePath}> {`${this.props.data.name}`}</a></Card.Title>
+                                   href={this.props.data.profile_path}> {`${this.props.data.name}`}</a></Card.Title>
                     <Card.Text>
                        SOME TEXT
                     </Card.Text>

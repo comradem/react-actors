@@ -2,7 +2,7 @@ class ActorObj {
     constructor(obj) {
         if (arguments.length === 1) {
             this.name = obj.name;
-            this.profilePath = `${process.env.REACT_APP_TMDB_GET_IMG}${obj.profilePath}`;
+            this.profile_path = `${process.env.REACT_APP_TMDB_GET_IMG}${obj.profile_path}`;
             this.id = obj.id
         }else {
             this.name = "";
